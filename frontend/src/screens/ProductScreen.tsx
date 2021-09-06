@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import Rating from "../components/Rating";
-import { useDispatch, useSelector } from "react-redux";
-import { useProductsList } from "../state/products/productsSelector";
+import { useDispatch } from "react-redux";
 import * as api from "../common/api";
-import { IProductsEntry } from "../state/products/productsState";
 import {
   PRODUCT_DETAIL_FAIL,
   PRODUCT_DETAIL_REQUEST,
@@ -19,20 +17,19 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useDispatch();
   const id = props.match.params.id;
 
-
   const getProductDetails = useCallback(async () => {
     dispatch(PRODUCT_DETAIL_REQUEST());
     try {
       const response = await api.getSingleProduct(id);
       dispatch(PRODUCT_DETAIL_SUCCESS(response));
     } catch (error) {
-      dispatch(PRODUCT_DETAIL_FAIL(error.message));
+      dispatch(PRODUCT_DETAIL_FAIL(error));
     }
-  }, []);
+  }, [dispatch,id]);
 
   useEffect(() => {
     getProductDetails();
-    console.log(product)
+    console.log(product);
   }, [dispatch, id]);
 
   if (!product) <div>Product not found</div>;

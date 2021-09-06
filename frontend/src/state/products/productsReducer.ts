@@ -1,10 +1,6 @@
 import { IProductsEntry, IProductsState } from "./productsState";
 import { handleActions, Action } from "redux-actions";
-import {
-  ActionNames,
-  ActionTypes,
-  PRODUCT_LIST_SUCCESS,
-} from "./productsActions";
+import { ActionNames, ActionTypes } from "./productsActions";
 
 const initialState: IProductsState = {
   data: [],
@@ -28,6 +24,7 @@ const reducer = handleActions<IProductsState, ActionTypes>(
         ...state,
         data: action.payload,
         loading: false,
+        error: "",
       };
     },
     [ActionNames.PRODUCT_LIST_FAIL]: (state, action: Action<string>) => {

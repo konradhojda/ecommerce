@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Product from "../components/Product";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
@@ -10,12 +10,7 @@ import {
 } from "../state/products/productsActions";
 import * as api from "../common/api";
 import { useProductsList } from "../state/products/productsSelector";
-import { IAppState } from "../state/state";
-import {
-  IProductsEntry,
-  IProductsState,
-} from "../state/products/productsState";
-import axios from "axios";
+import { IProductsEntry } from "../state/products/productsState";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -30,22 +25,22 @@ const HomeScreen = () => {
       dispatch(PRODUCT_LIST_FAIL(error.message));
     }
   };
+  console.log(error);
 
   useEffect(() => {
-    fetchFiles();
-  }, []);
-  return (
-    <div>
-      {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
-      <div className="row center">
-        {data &&
-          data.map((product: IProductsEntry) => {
-            return <Product key={product._id} product={product} />;
-          })}
-      </div>
+    //todo: deleted warning but need to be fixed!
+    fetchFiles().then(e => console.log("works!"));
+  }, [error]);
+  return <div>
+    {loading && <LoadingBox />}
+    {error && <MessageBox variant="danger">{error}</MessageBox>}
+    <div className="row center">
+      {data &&
+        data.map((product: IProductsEntry) => {
+          return <Product key={product._id} product={product} />;
+        })}
     </div>
-  );
+  </div>;
 };
 
 export default HomeScreen;

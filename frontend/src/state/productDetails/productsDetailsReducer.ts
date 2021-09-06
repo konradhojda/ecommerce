@@ -1,10 +1,9 @@
 import { IProductsEntry } from "../products/productsState";
-import { IProductsState, IProductState } from "../products/productsState";
+import { IProductState } from "../products/productsState";
 import { handleActions, Action } from "redux-actions";
 import {
   ActionNames,
-  ActionTypes,
-  PRODUCT_DETAIL_SUCCESS,
+  ActionTypes
 } from "./productsDetailsActions";
 
 const initialState: IProductState = {
@@ -28,7 +27,6 @@ const initialState: IProductState = {
 const reducer = handleActions<IDetailsProduct, ActionTypes>(
   {
     [ActionNames.PRODUCT_DETAIL_REQUEST]: (state, action: Action<string>) => {
-      const data = {}
       return {
         ...state,
         loading: true,
