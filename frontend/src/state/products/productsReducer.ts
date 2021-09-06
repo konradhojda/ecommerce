@@ -5,7 +5,6 @@ import {
   ActionTypes,
   PRODUCT_LIST_SUCCESS,
 } from "./productsActions";
-import { Simulate } from "react-dom/test-utils";
 
 const initialState: IProductsState = {
   data: [],
@@ -15,7 +14,7 @@ const initialState: IProductsState = {
 
 const reducer = handleActions<IProductsState, ActionTypes>(
   {
-    [ActionNames.PRODUCT_LIST_REQUEST]: (state, action) => {
+    [ActionNames.PRODUCT_LIST_REQUEST]: (state, action: Action<string>) => {
       return {
         ...state,
         loading: true,

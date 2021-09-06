@@ -9,16 +9,6 @@ export interface IProductsEntry {
   rating: number;
   numReviews: number;
   description: string;
-}
-
-export interface IProductsState {
-  data: IProductsEntry[];
-  loading?: boolean;
   error?: string;
-}
-
-export interface IProductState {
-  data: IProductsEntry;
   loading?: boolean;
-  error?: string;
 }
