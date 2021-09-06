@@ -8,11 +8,6 @@ import {_createStore} from "./store";
 
 const store = _createStore();
 
-declare interface Window {
-  _getState: () => any;
-}
-
-// @ts-ignore
 window._getState = () => store.getState();
 
 ReactDOM.render(

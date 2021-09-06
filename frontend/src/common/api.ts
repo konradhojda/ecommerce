@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getAllProducts() {
-  const url = `/api/products`
+  const url = `/api/products`;
   try {
     const response = await axios.get(url);
     return response.data;

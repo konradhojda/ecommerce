@@ -1,7 +1,7 @@
 import { IProductsState, IProductState } from "./products/productsState";
 import {
   IProductsEntry,
-} from "./productDetails/productsDetailsState";
+} from "./products/productsState";
 
 export interface IAppState {
   products: IProductsState;

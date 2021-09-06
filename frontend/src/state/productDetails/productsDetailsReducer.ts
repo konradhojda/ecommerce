@@ -1,4 +1,4 @@
-import { IProductsEntry } from "./productsDetailsState";
+import { IProductsEntry } from "../products/productsState";
 import { IProductsState, IProductState } from "../products/productsState";
 import { handleActions, Action } from "redux-actions";
 import {
