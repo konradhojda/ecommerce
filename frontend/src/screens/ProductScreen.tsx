@@ -23,13 +23,13 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
       const response = await api.getSingleProduct(id);
       dispatch(PRODUCT_DETAIL_SUCCESS(response));
     } catch (error) {
+      console.log(error);
       dispatch(PRODUCT_DETAIL_FAIL(error));
     }
-  }, [dispatch,id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     getProductDetails();
-    console.log(product);
   }, [dispatch, id]);
 
   if (!product) <div>Product not found</div>;
@@ -37,7 +37,7 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
   return (
     <>
       <div>
-        <Link to="/">Back to result</Link>
+        {!error && !loading && <Link to="/">Back to result</Link>}
         {loading && <LoadingBox />}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {product && !error && !loading && (

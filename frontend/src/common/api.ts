@@ -17,6 +17,9 @@ export async function getSingleProduct(id: string) {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    return error.response && error.response.data.message ? error.response.data.message : error.message
+    if (error.response && error.response.data.message) {
+      throw error.response.data.message;
+    }
+    throw error.message;
   }
 }
