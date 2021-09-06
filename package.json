@@ -1,8 +1,9 @@
 {
-  "name": "E-commerce",
+  "name": "Ecommerce",
   "version": "0.1",
   "scripts": {
     "start_backend": "yarn --cwd backend/ start",
     "start_frontend": "yarn --cwd frontend/ start",
+    "start": "yarn start_backend & yarn start_frontend"
   }
 }
