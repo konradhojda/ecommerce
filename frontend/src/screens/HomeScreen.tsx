@@ -25,12 +25,11 @@ const HomeScreen = () => {
       dispatch(PRODUCT_LIST_FAIL(error.message));
     }
   };
-  console.log(error);
 
   useEffect(() => {
     //todo: deleted warning but need to be fixed!
-    fetchFiles().then(e => console.log("works!"));
-  }, [error]);
+    fetchFiles();
+  }, []);
   return <div>
     {loading && <LoadingBox />}
     {error && <MessageBox variant="danger">{error}</MessageBox>}

@@ -30,7 +30,7 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
 
   useEffect(() => {
     getProductDetails();
-  }, [dispatch, id]);
+  }, [dispatch, id, getProductDetails]);
 
   if (!product) <div>Product not found</div>;
 
