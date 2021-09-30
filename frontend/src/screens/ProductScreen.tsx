@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import Rating from "../components/Rating";
 import { useDispatch } from "react-redux";
@@ -11,13 +11,15 @@ import {
 import { useProductsDetails } from "../state/productDetails/productsDetailsSelector";
 import MessageBox from "../components/MessageBox";
 import LoadingBox from "../components/LoadingBox";
+import { routeTo } from "../App";
 
 const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
+  const [quantity, setQuantity] = useState<number>(1);
   const { data: product, loading, error } = useProductsDetails();
   const dispatch = useDispatch();
   const id = props.match.params.id;
 
-  const getProductDetails = useCallback(async () => {
+  const getProductDetails = async () => {
     dispatch(PRODUCT_DETAIL_REQUEST());
     try {
       const response = await api.getSingleProduct(id);
@@ -26,11 +28,15 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
       console.log(error);
       dispatch(PRODUCT_DETAIL_FAIL(error));
     }
-  }, [dispatch, id]);
+  };
 
   useEffect(() => {
     getProductDetails();
-  }, [dispatch, id, getProductDetails]);
+  }, [dispatch, id]);
+
+  const addToCartHandler = () => {
+    props.history.push(`${routeTo.cartScreen(id, quantity)}`);
+  };
 
   if (!product) <div>Product not found</div>;
 
@@ -90,9 +96,38 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
                       </div>
                     </div>
                   </li>
-                  <li>
-                    <button className="primary block">Add to cart</button>
-                  </li>
+                  {product.countInStock > 0 && (
+                    <>
+                      <div className="row">
+                        <div>Quantity</div>
+                        <div>
+                          <select
+                            value={quantity}
+                            onChange={(e) => setQuantity(+e.target.value)}
+                          >
+                            {
+                              // @ts-ignore
+                              [...Array(product.countInStock).keys()].map(
+                                (e: number) => (
+                                  <option key={e + 1} value={e + 1}>
+                                    {e + 1}
+                                  </option>
+                                )
+                              )
+                            }
+                          </select>
+                        </div>
+                      </div>
+                      <li>
+                        <button
+                          className="primary block"
+                          onClick={addToCartHandler}
+                        >
+                          Add to cart
+                        </button>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
