@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import * as ApiModel from './ApiModel';
 
 export async function getAllProducts() {
   const url = `/api/products`;
@@ -10,11 +11,11 @@ export async function getAllProducts() {
   }
 }
 
-export async function getSingleProduct(id: string) {
+export async function getSingleProduct(id: string): Promise<ApiModel.IGetSingleProductResponse> {
   const url = `/api/products/${id}`;
 
   try {
-    const response = await axios.get(url);
+    const response: AxiosResponse = await axios.get<ApiModel.IGetSingleProductResponse>(url);
     return response.data;
   } catch (error) {
     if (error.response && error.response.data.message) {
