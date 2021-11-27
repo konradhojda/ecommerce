@@ -27,19 +27,20 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-    //todo: deleted warning but need to be fixed!
     fetchFiles();
   }, []);
-  return <div>
-    {loading && <LoadingBox />}
-    {error && <MessageBox variant="danger">{error}</MessageBox>}
-    <div className="row center">
-      {data &&
-        data.map((product: IProductsEntry) => {
-          return <Product key={product._id} product={product} />;
-        })}
+  return (
+    <div>
+      {loading && <LoadingBox />}
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
+      <div className="row center">
+        {data &&
+          data.map((product: IProductsEntry) => {
+            return <Product key={product._id} product={product} />;
+          })}
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default HomeScreen;

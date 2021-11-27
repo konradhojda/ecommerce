@@ -13,7 +13,7 @@ const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
   const addItemToCart = async () => {
     try {
       const response = await api.getSingleProduct(id);
-      dispatch(CART_ADD_ITEM({...response, quantity}));
+      dispatch(CART_ADD_ITEM({ ...response, quantity }));
     } catch {}
   };
 

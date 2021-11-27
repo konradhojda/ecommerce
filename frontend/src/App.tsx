@@ -6,14 +6,15 @@ import CartScreen from "./screens/CartScreen";
 
 export const routeTo = {
   productScreen: (id: number) => `/product/:id`,
-  cartScreen: (id: string, quantity: number = 1) => `/cart/${id}?quantity=${quantity}`
+  cartScreen: (id: string, quantity: number = 1) =>
+    `/cart/${id}?quantity=${quantity}`,
 };
 
 export const path = {
-  home: '/',
-  productScreen: '/product/:id',
-  cartScreen: '/cart/:id?'
-}
+  home: "/",
+  productScreen: "/product/:id?",
+  cartScreen: "/cart/:id?",
+};
 
 function App() {
   return (
@@ -21,9 +22,7 @@ function App() {
       <div className="grid-container">
         <header className="row">
           <div>
-           <Link to="/">
-             E-commerce
-           </Link>
+            <Link to="/">E-commerce</Link>
           </div>
           <div>
             <a href="/cart">Cart</a>
@@ -33,7 +32,7 @@ function App() {
         <main>
           <Route path={path.productScreen} component={ProductScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
-          <Route path={path.cartScreen} component={CartScreen}/>
+          <Route path={path.cartScreen} component={CartScreen} />
         </main>
         <footer className="row center">All right reserved</footer>
       </div>

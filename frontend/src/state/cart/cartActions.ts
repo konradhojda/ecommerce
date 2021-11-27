@@ -10,7 +10,7 @@ export const ActionNames = {
 export type ActionTypes = string & CART_ADD_ITEM_ACTION;
 
 export interface CART_ADD_ITEM_ACTION extends IProductsEntry {
-  quantity: number | null;
+  quantity?: number | null;
 }
 
 export const CART_ADD_ITEM = createAction<CART_ADD_ITEM_ACTION>(
