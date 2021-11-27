@@ -8,7 +8,7 @@ const initialState: IProductsState = {
   error: "",
 };
 
-const reducer = handleActions<IProductsState, ActionTypes>(
+const productsReducer = handleActions<IProductsState, ActionTypes>(
   {
     [ActionNames.PRODUCT_LIST_REQUEST]: (state, action: Action<string>) => {
       return {
@@ -38,4 +38,4 @@ const reducer = handleActions<IProductsState, ActionTypes>(
   initialState
 );
 
-export default reducer;
+export default productsReducer;
