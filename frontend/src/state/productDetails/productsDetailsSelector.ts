@@ -3,5 +3,7 @@ import { IProductState } from "../products/productsState";
 import { IAppState } from "../state";
 
 export const useProductsDetails = () => {
-  return useSelector<IAppState, IProductState>((state) => state.productsDetails);
+  return useSelector<IAppState, IProductState>(
+    (state) => state.productsDetails
+  );
 };

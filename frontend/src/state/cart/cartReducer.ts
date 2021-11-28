@@ -14,14 +14,13 @@ const cartReducer = handleActions<ICartState, ActionTypes>(
       action: Action<CART_ADD_ITEM_ACTION>
     ) => {
       const item = action.payload;
-      console.log(action.payload);
       const existItem = state.cartItems.find(
         (x: IProductsEntry) => x._id === item._id
       );
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((x: any) =>
+          cartItems: state.cartItems.map((x: IProductsEntry) =>
             x._id === existItem._id ? item : x
           ),
         };
