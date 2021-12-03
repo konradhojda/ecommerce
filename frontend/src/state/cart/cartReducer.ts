@@ -1,6 +1,6 @@
 import { handleActions, Action } from "redux-actions";
 import { ActionTypes, ActionNames, CART_ADD_ITEM_ACTION } from "./cartActions";
-import { ICartState } from "./cartState";
+import { ICartEntry, ICartState } from "./cartState";
 import { IProductsEntry } from "../products/productsState";
 
 const initialState: ICartState = {
@@ -15,12 +15,12 @@ const cartReducer = handleActions<ICartState, ActionTypes>(
     ) => {
       const item = action.payload;
       const existItem = state.cartItems.find(
-        (x: IProductsEntry) => x._id === item._id
+        (x: ICartEntry) => x._id === item._id
       );
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((x: IProductsEntry) =>
+          cartItems: state.cartItems.map((x: ICartEntry) =>
             x._id === existItem._id ? item : x
           ),
         };

@@ -1,7 +1,7 @@
 import { IProductsEntry } from "../products/productsState";
 
-interface ICartEntry extends IProductsEntry {
-  quantity?: string;
+export interface ICartEntry extends IProductsEntry {
+  quantity: number;
 }
 
 export interface ICartState {

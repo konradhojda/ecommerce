@@ -1,5 +1,6 @@
 import { createAction } from "redux-actions";
 import { IProductsEntry } from "../products/productsState";
+import { ICartEntry } from "./cartState";
 
 const prefix = "cart";
 
@@ -9,9 +10,7 @@ export const ActionNames = {
 
 export type ActionTypes = string & CART_ADD_ITEM_ACTION;
 
-export interface CART_ADD_ITEM_ACTION extends IProductsEntry {
-  quantity?: number | null;
-}
+export interface CART_ADD_ITEM_ACTION extends ICartEntry {}
 
 export const CART_ADD_ITEM = createAction<CART_ADD_ITEM_ACTION>(
   ActionNames.CART_ADD_ITEM
