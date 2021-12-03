@@ -15,20 +15,10 @@ const reducer = combineReducers<IAppState>({
   cart: cartReducer,
 });
 
-const state: Partial<IAppState> = {
-  cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems") || "")
-      : [],
-  },
-};
-
-console.log(state, localStorage.getItem("cartItems"));
-
 export const _createStore = (initialState: Partial<IAppState> = {}) => {
   return createStore(
     reducer,
-    { ...initialState, ...state },
+    { ...initialState },
     composeEnhancers(applyMiddleware(thunk))
   );
 };

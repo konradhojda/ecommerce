@@ -1,9 +1,12 @@
+// noinspection JSRemoveUnnecessaryParentheses
+
 import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { CART_ADD_ITEM } from "../state/cart/cartActions";
 import * as api from "../common/api";
 import { useProductCart } from "../state/cart/cartSelector";
+import MessageBox from "../components/MessageBox";
 
 const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
   const id = props.match.params.id;
@@ -26,11 +29,30 @@ const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
   }, [cartItems]);
 
   return (
-    <div>
-      <h1>Cart screen</h1>
-      <p>
-        Product id: {id}, quantity: {quantity}
-      </p>
+    <div className="row top">
+      <div className="col-2">
+        <h1>Shopping Cart</h1>
+        {cartItems.length ? (
+          <ul>
+            {cartItems.map((item) => (
+              <li key={item._id}>
+                <img src={item.image} alt={item.name} className="small" />
+                <div className="min-30">
+                  <Link to={`/product/${item._id}`}>{item.name}</Link>
+                </div>
+                <div>
+                  {item.quantity}
+                  <select value={item.quantity} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <MessageBox>
+            <Link to="/">Go Shopping</Link>
+          </MessageBox>
+        )}
+      </div>
     </div>
   );
 };

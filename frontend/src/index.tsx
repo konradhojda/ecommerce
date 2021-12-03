@@ -6,7 +6,15 @@ import App from "./App";
 import { _createStore } from "./store";
 import { IAppState } from "./state/state";
 
-const store = _createStore();
+export const InitialState: Partial<IAppState> = {
+  cart: {
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems") || "")
+      : [],
+  },
+};
+
+const store = _createStore({ ...InitialState });
 
 window._getState = () => store.getState();
 
