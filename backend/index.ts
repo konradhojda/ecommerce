@@ -1,6 +1,9 @@
 import express from "express";
 import { data } from "./data";
+import mongose from "mongoose";
 const app = express();
+
+// mongose.connect()
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
