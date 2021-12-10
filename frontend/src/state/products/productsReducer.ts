@@ -1,4 +1,4 @@
-import { IProductsEntry, IProductsState } from "./productsState";
+import { IProductEntry, IProductsState } from "./productsState";
 import { handleActions, Action } from "redux-actions";
 import { ActionNames, ActionTypes } from "./productsActions";
 
@@ -18,7 +18,7 @@ const productsReducer = handleActions<IProductsState, ActionTypes>(
     },
     [ActionNames.PRODUCT_LIST_SUCCESS]: (
       state,
-      action: Action<IProductsEntry[]>
+      action: Action<IProductEntry[]>
     ) => {
       return {
         ...state,

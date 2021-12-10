@@ -1,7 +1,12 @@
 import { handleActions, Action } from "redux-actions";
-import { ActionTypes, ActionNames, CART_ADD_ITEM_ACTION } from "./cartActions";
+import {
+  ActionTypes,
+  ActionNames,
+  CART_ADD_ITEM_ACTION,
+  CART_REMOVE_ITEM,
+} from "./cartActions";
 import { ICartEntry, ICartState } from "./cartState";
-import { IProductsEntry } from "../products/productsState";
+import { IProductEntry } from "../products/productsState";
 
 const initialState: ICartState = {
   cartItems: [],
@@ -27,6 +32,16 @@ const cartReducer = handleActions<ICartState, ActionTypes>(
       } else {
         return { ...state, cartItems: [...state.cartItems, item] };
       }
+    },
+    [ActionNames.CART_REMOVE_ITEM]: (
+      state,
+      action: Action<CART_REMOVE_ITEM>
+    ) => {
+      const { _id } = action.payload;
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((el) => _id !== el._id),
+      };
     },
   },
   initialState

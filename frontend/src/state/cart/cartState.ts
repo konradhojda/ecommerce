@@ -1,6 +1,6 @@
-import { IProductsEntry } from "../products/productsState";
+import { IProductEntry } from "../products/productsState";
 
-export interface ICartEntry extends IProductsEntry {
+export interface ICartEntry extends IProductEntry {
   quantity: number;
 }
 

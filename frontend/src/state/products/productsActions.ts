@@ -1,5 +1,5 @@
 import { createAction } from "redux-actions";
-import { IProductsEntry } from "./productsState";
+import { IProductEntry } from "./productsState";
 
 const prefix = "products";
 
@@ -9,12 +9,12 @@ export const ActionNames = {
   PRODUCT_LIST_SUCCESS: `[${prefix}] PRODUCT_LIST_SUCCESS`,
 };
 
-export type ActionTypes = string & IProductsEntry[];
+export type ActionTypes = string & IProductEntry[];
 
 export const PRODUCT_LIST_REQUEST = createAction(
   ActionNames.PRODUCT_LIST_REQUEST
 );
-export const PRODUCT_LIST_SUCCESS = createAction<IProductsEntry[]>(
+export const PRODUCT_LIST_SUCCESS = createAction<IProductEntry[]>(
   ActionNames.PRODUCT_LIST_SUCCESS
 );
 export const PRODUCT_LIST_FAIL = createAction<string>(

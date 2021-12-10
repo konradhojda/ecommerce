@@ -1,4 +1,4 @@
-export interface IProductsEntry {
+export interface IProductEntry {
   _id: string;
   name: string;
   category: string;
@@ -12,13 +12,13 @@ export interface IProductsEntry {
 }
 
 export interface IProductsState {
-  data: IProductsEntry[];
+  data: IProductEntry[];
   loading?: boolean;
   error?: string;
 }
 
 export interface IProductState {
-  data: IProductsEntry;
+  data: IProductEntry;
   loading?: boolean;
   error?: string;
 }

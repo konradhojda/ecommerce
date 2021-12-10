@@ -3,10 +3,11 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { CART_ADD_ITEM } from "../state/cart/cartActions";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../state/cart/cartActions";
 import * as api from "../common/api";
 import { useProductCart } from "../state/cart/cartSelector";
 import MessageBox from "../components/MessageBox";
+import cartReducer from "../state/cart/cartReducer";
 
 const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
   const id = props.match.params.id;
@@ -15,13 +16,12 @@ const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useDispatch();
   const { cartItems } = useProductCart();
 
-  const addItemToCart = useCallback(
+  const handleAddToCart = useCallback(
     async (id: string, quantity: number) => {
       try {
         const response = await api.getSingleProduct(id);
-        dispatch(CART_ADD_ITEM({ ...response, quantity }));
+        await dispatch(CART_ADD_ITEM({ ...response, quantity }));
         //todo: with epic as side effect add to localStorage
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
       } catch (error) {
         throw error;
       }
@@ -29,21 +29,20 @@ const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
     [cartItems]
   );
   useEffect(() => {
-    console.log("asd");
-    addItemToCart(id, quantity);
+    handleAddToCart(id, quantity);
   }, []);
 
-  const handleAddToCart = useCallback((id: string, quantity: number) => {
-    addItemToCart(id, quantity);
-  }, []);
-
-  const handleRemoveItem = useCallback((id: string) => {
-    //todo
-  }, []);
+  const handleRemoveItem = (_id: string) => {
+    dispatch(CART_REMOVE_ITEM({ _id }));
+  };
 
   const checkoutHandler = () => {
-    //todo
+    props.history.push("/signin?redirect=shipping");
   };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <div className="row top">
@@ -53,7 +52,7 @@ const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
           <ul>
             {cartItems.map((item) => (
               <li key={item._id}>
-                <div>
+                <div className="row">
                   <img src={item.image} alt={item.name} className="small" />
                   <div className="min-30">
                     <Link to={`/product/${item._id}`}>{item.name}</Link>

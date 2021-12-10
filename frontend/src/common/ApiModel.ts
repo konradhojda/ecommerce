@@ -1,3 +1,3 @@
-import {IProductsEntry} from "../state/products/productsState";
+import { IProductEntry } from "../state/products/productsState";
 
-export type IGetSingleProductResponse = IProductsEntry;
+export type IGetSingleProductResponse = IProductEntry;

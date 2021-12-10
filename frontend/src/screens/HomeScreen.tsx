@@ -10,7 +10,7 @@ import {
 } from "../state/products/productsActions";
 import * as api from "../common/api";
 import { useProductsList } from "../state/products/productsSelector";
-import { IProductsEntry } from "../state/products/productsState";
+import { IProductEntry } from "../state/products/productsState";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const HomeScreen = () => {
       {error && <MessageBox variant="danger">{error}</MessageBox>}
       <div className="row center">
         {data &&
-          data.map((product: IProductsEntry) => {
+          data.map((product: IProductEntry) => {
             return <Product key={product._id} product={product} />;
           })}
       </div>
