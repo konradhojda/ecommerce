@@ -6,7 +6,8 @@ require("dotenv").config();
 const app = express();
 
 mongoose.connect(
-  `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.xcwc9.mongodb.net/test`
+  process.env.MONGO_URL ||
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.xcwc9.mongodb.net/test`
 );
 
 app.get("/api/products", (req, res) => {
