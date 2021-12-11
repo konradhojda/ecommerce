@@ -1,9 +1,13 @@
 import express from "express";
 import { data } from "./data";
-import mongose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
+import userRouter from "./routers/userRouter";
+require("dotenv").config();
 const app = express();
 
-// mongose.connect()
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.xcwc9.mongodb.net/test`
+);
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
@@ -18,6 +22,10 @@ app.get("/api/products/:id", (req, res) => {
 
 app.get("/", (req, res) => {
   res.send("Server is ready");
+});
+app.use("/api/users", userRouter);
+app.use((err: any, req: any, res: any, next: any) => {
+  res.status(500).send({ message: err.message });
 });
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
