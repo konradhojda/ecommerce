@@ -4,7 +4,7 @@ import * as ApiModel from "./ApiModel";
 export async function getAllProducts() {
   const url = `/api/products`;
   try {
-    const response = await axios.get(url);
+    const response: AxiosResponse = await axios.get(url);
     return response.data;
   } catch (error) {
     throw error;

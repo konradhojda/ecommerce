@@ -2,7 +2,8 @@ import express from "express";
 import mongoose, { ConnectOptions } from "mongoose";
 import userRouter from "./routers/userRouter";
 import productRouter from "./routers/productRouter";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5001;

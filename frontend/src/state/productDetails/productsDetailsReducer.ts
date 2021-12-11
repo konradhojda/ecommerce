@@ -36,8 +36,8 @@ const reducer = handleActions<IDetailsProduct, ActionTypes>(
     ) => {
       return {
         ...state,
-        data: action.payload,
         loading: false,
+        data: action.payload,
       };
     },
     [ActionNames.PRODUCT_DETAIL_FAIL]: (state, action: Action<string>) => {

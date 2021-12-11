@@ -44,9 +44,9 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
     <>
       <div>
         {!error && !loading && <Link to="/">Back to result</Link>}
-        {loading && <LoadingBox />}
+        {/*{loading && <LoadingBox />}*/}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        {product && !error && !loading && (
+        {product && (
           <div className="row top">
             <div className="col-2">
               <img className="large" src={product.image} alt={product.name} />
