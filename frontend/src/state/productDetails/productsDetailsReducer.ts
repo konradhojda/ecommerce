@@ -27,6 +27,7 @@ const reducer = handleActions<IDetailsProduct, ActionTypes>(
       return {
         ...state,
         loading: true,
+        error: null,
       };
     },
     [ActionNames.PRODUCT_DETAIL_SUCCESS]: (
