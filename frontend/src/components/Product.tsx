@@ -1,9 +1,10 @@
 import React from "react";
 import Rating from "./Rating";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { IProductEntry } from "../state/products/productsState";
 
 interface IProps {
-  product: any;
+  product: IProductEntry;
 }
 
 const Product = (props: IProps) => {

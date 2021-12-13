@@ -29,16 +29,17 @@ const HomeScreen = () => {
   useEffect(() => {
     fetchFiles();
   }, []);
+
   return (
-    <div>
-      {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
+    <div className="row center">
       <div className="row center">
         {data &&
           data.map((product: IProductEntry) => {
             return <Product key={product._id} product={product} />;
           })}
       </div>
+      {loading && <LoadingBox />}
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
     </div>
   );
 };

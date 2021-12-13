@@ -1,9 +1,7 @@
 import React from "react";
-import { BrowserRouter, Link, Route } from "react-router-dom";
-import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen";
-import CartScreen from "./screens/CartScreen";
 import { useProductCart } from "./state/cart/cartSelector";
+import Header from "./components/Header/Header";
+import AppRouter from "./AppRouter";
 
 export const routeTo = {
   productScreen: (id: number) => `/product/:id`,
@@ -17,33 +15,16 @@ export const path = {
   cartScreen: "/cart/:id?",
 };
 
-function App() {
+function App(children: any) {
   const { cartItems } = useProductCart();
   return (
-    <BrowserRouter>
-      <div className="grid-container">
-        <header className="row">
-          <div>
-            <Link to="/">E-commerce</Link>
-          </div>
-          <div>
-            <Link to="/cart">
-              Cart
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
-            <Link to="/signin">Sign In</Link>
-          </div>
-        </header>
-        <main>
-          <Route path={path.productScreen} component={ProductScreen}></Route>
-          <Route path="/" component={HomeScreen} exact></Route>
-          <Route path={path.cartScreen} component={CartScreen} />
-        </main>
-        <footer className="row center">All right reserved</footer>
-      </div>
-    </BrowserRouter>
+    <div className="grid-container">
+      <Header cartItems={cartItems} />
+      <main>
+        <AppRouter />
+      </main>
+      <footer className="row center">All right reserved</footer>
+    </div>
   );
 }
 
