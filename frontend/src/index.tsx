@@ -5,6 +5,8 @@ import "./index.css";
 import App from "./App";
 import { _createStore } from "./store";
 import { IAppState } from "./state/state";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./AppRouter";
 
 export const InitialState: Partial<IAppState> = {
   cart: {
@@ -21,7 +23,9 @@ window._getState = () => store.getState();
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

@@ -1,25 +1,31 @@
 import express from "express";
-import { data } from "./data";
-import mongose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
+import userRouter from "./routers/userRouter";
+import productRouter from "./routers/productRouter";
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const port = process.env.PORT || 5001;
 
-// mongose.connect()
+mongoose.connect(
+  process.env.MONGO_URL ||
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.xcwc9.mongodb.net/test`
+);
 
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const product = data.products.find((x) => x._id === req.params.id);
-  product
-    ? res.send(product)
-    : res.status(404).send({ message: "Product not found." });
-});
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
-const port = process.env.PORT || 5001;
+
+app.use((err: any, req: any, res: any, next: any) => {
+  res.status(500).send({ message: err.message });
+});
+
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });
