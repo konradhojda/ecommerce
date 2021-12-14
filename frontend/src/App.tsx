@@ -7,12 +7,16 @@ export const routeTo = {
   productScreen: (id: number) => `/product/:id`,
   cartScreen: (id: string, quantity: number = 1) =>
     `/cart/${id}?quantity=${quantity}`,
+  signin: () => `/signin`,
+  register: () => `register`,
 };
 
 export const path = {
   home: "/",
   productScreen: "/product/:id?",
   cartScreen: "/cart/:id?",
+  signin: "/signin",
+  register: "/register",
 };
 
 function App(children: any) {
