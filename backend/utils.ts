@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
-require("dotenv").config();
+import { config } from "dotenv";
+
+config();
 
 export const generateToken = (user: any) => {
   return jwt.sign(
@@ -9,7 +11,7 @@ export const generateToken = (user: any) => {
       email: user.email,
       isAdmin: user.isAdmin,
     },
-    process.env.JWT_SECRET || "",
+    process.env.JWT_SECRET || "something",
     { expiresIn: "30d" }
   );
 };

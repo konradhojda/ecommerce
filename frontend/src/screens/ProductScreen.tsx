@@ -21,12 +21,11 @@ import PageFallback from "../components/PageFallback/PageFallback";
 const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
   const [quantity, setQuantity] = useState<number>(1);
   const { data: product, error, loading } = useProductsList();
+  const { data: product2 } = useProductsDetails();
   const dispatch = useDispatch();
   const id = props.match.params.id;
 
   const myData = product.find((x: IProductEntry) => x._id === id);
-
-  console.log(myData);
 
   const getProductDetails = useCallback(async () => {
     dispatch(PRODUCT_DETAIL_REQUEST());
@@ -37,7 +36,7 @@ const ProductScreen = (props: RouteComponentProps<{ id: string }>) => {
       console.log(error);
       dispatch(PRODUCT_DETAIL_FAIL(error));
     }
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     getProductDetails();
