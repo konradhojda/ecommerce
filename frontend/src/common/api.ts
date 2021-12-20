@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import * as ApiModel from "./ApiModel";
+import { IProductEntry } from "../state/products/productsState";
 
 export async function getAllProducts() {
   const url = `/api/products`;
@@ -26,4 +27,12 @@ export async function getSingleProduct(
     }
     throw error.message;
   }
+}
+
+export async function addItem(data: Omit<IProductEntry, "_id">) {
+  const url = `/api/admin/additem`;
+  try {
+    const response = await axios.post(url, data);
+    return response;
+  } catch (e) {}
 }

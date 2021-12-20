@@ -8,7 +8,8 @@ export const routeTo = {
   cartScreen: (id: string, quantity: number = 1) =>
     `/cart/${id}?quantity=${quantity}`,
   signin: () => `/signin`,
-  register: () => `register`,
+  register: () => `/register`,
+  addItem: () => `/admin/additem`,
 };
 
 export const path = {
@@ -17,6 +18,7 @@ export const path = {
   cartScreen: "/cart/:id?",
   signin: "/signin",
   register: "/register",
+  addItem: "/admin/additem",
 };
 
 function App(children: any) {

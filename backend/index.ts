@@ -3,6 +3,7 @@ import mongoose, { ConnectOptions } from "mongoose";
 import userRouter from "./routers/userRouter";
 import productRouter from "./routers/productRouter";
 import dotenv from "dotenv";
+import addItemRouter from "./routers/admin/addItem";
 dotenv.config();
 
 const app = express();
@@ -17,6 +18,7 @@ mongoose.connect(
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/admin", addItemRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is ready");
