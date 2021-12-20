@@ -21,7 +21,7 @@ export const path = {
   addItem: "/admin/additem",
 };
 
-function App(children: any) {
+const App = () => {
   const { cartItems } = useProductCart();
   return (
     <div className="grid-container">
@@ -32,6 +32,6 @@ function App(children: any) {
       <footer className="row center">All right reserved</footer>
     </div>
   );
-}
+};
 
 export default App;

@@ -24,7 +24,7 @@ const SigninScreen: React.FC<Props> = () => {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Sign in</h1>
         </div>

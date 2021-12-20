@@ -6,6 +6,7 @@ import productsDetailsReducer from "./state/productDetails/productsDetailsReduce
 import { IAppState } from "./state/state";
 import cartReducer from "./state/cart/cartReducer";
 import { IProductEntry } from "./state/products/productsState";
+import userLoginReducer from "./state/userLogin/userLoginReducer";
 
 const composeEnhancers = composeWithDevTools || compose;
 
@@ -13,6 +14,7 @@ const reducer = combineReducers<IAppState>({
   products: productsReducer,
   productsDetails: productsDetailsReducer,
   cart: cartReducer,
+  userLogin: userLoginReducer,
 });
 
 export const _createStore = (initialState: Partial<IAppState> = {}) => {
