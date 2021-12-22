@@ -33,6 +33,25 @@ export async function addItem(data: Omit<IProductEntry, "_id">) {
   const url = `/api/admin/additem`;
   try {
     const response = await axios.post(url, data);
-    return response;
-  } catch (e) {}
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw error.response.data.message;
+    }
+    throw error.message;
+  }
+}
+
+export async function userLogin(email: string, password: string) {
+  const url = `/api/users/signin`;
+  try {
+    const response: AxiosResponse<ApiModel.UserLoginResponse> =
+      await axios.post(url, { email: email, password: password });
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw error.response.data.message;
+    }
+    throw error.message;
+  }
 }

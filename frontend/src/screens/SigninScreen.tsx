@@ -1,16 +1,26 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { path } from "../App";
-
+import { useDispatch } from "react-redux";
+import { useUserLogin } from "../state/userLogin/userLoginSelector";
+import {
+  USER_SIGNIN_FAIL,
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+} from "../state/userLogin/userLoginActions";
+import * as api from "../common/api";
+import Spin from "antd/lib/spin";
 interface Props {}
 
 const SigninScreen: React.FC<Props> = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const submitHandler = () => {};
+  const { loading, loginError } = useUserLogin();
+
   const handleEmailChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
+      setEmail(event.target.value);
     },
     [setPassword]
   );
@@ -22,8 +32,20 @@ const SigninScreen: React.FC<Props> = () => {
     [setPassword]
   );
 
+  const submitHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(USER_SIGNIN_REQUEST());
+    try {
+      const response = await api.userLogin(email, password);
+      dispatch(USER_SIGNIN_SUCCESS(response));
+    } catch (e) {
+      dispatch(USER_SIGNIN_FAIL(e));
+    }
+  };
+
   return (
     <div>
+      {loading && <Spin />}
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Sign in</h1>
@@ -50,6 +72,7 @@ const SigninScreen: React.FC<Props> = () => {
             onChange={handlePasswordChange}
           />
         </div>
+        {loginError && <p>{loginError}</p>}
         <button className="primary" type="submit">
           Submit
         </button>

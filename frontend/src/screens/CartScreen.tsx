@@ -7,7 +7,6 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../state/cart/cartActions";
 import * as api from "../common/api";
 import { useProductCart } from "../state/cart/cartSelector";
 import MessageBox from "../components/MessageBox";
-import cartReducer from "../state/cart/cartReducer";
 
 const CartScreen = (props: RouteComponentProps<{ id: string }>) => {
   const id = props.match.params.id;

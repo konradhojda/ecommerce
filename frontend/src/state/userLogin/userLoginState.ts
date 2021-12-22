@@ -4,4 +4,6 @@ export interface IUserLoginState {
   email: string;
   isAdmin: boolean;
   token: string;
+  loading?: boolean;
+  loginError?: string | null;
 }
